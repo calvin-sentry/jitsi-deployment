@@ -22,19 +22,6 @@ spec:
         k8s-app: prosody
         shard: "0"
     spec:
-      volumes:
-        - name: prosody
-          configMap:
-            name: prosody
-            items:
-              - key: mod_prometheus.lua
-                path: mod_prometheus.lua
-              - key: mod_measure_stanza_counts.lua
-                path: mod_measure_stanza_counts.lua
-              - key: mod_measure_client_presence.lua
-                path: mod_measure_client_presence.lua
-              - key: jitsi-meet.cfg.lua
-                path: jitsi-meet.cfg.lua
       containers:
         - name: prosody
           resources:
@@ -138,4 +125,17 @@ spec:
                 secretKeyRef:
                   name: jitsi-config
                   key: TURNS_PORT
-            
+      volumes:
+        - name: prosody
+          configMap:
+            name: prosody
+            items:
+              - key: mod_prometheus.lua
+                path: mod_prometheus.lua
+              - key: mod_measure_stanza_counts.lua
+                path: mod_measure_stanza_counts.lua
+              - key: mod_measure_client_presence.lua
+                path: mod_measure_client_presence.lua
+              - key: jitsi-meet.cfg.lua
+                path: jitsi-meet.cfg.lua
+      

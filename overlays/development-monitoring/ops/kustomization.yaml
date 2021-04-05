@@ -1,16 +1,21 @@
 bases:
   - ../../../base/ops
 
-resources:
-  - bbb-endpoints.yaml
-  - turn-endpoints.yaml
-  - certificate.yaml
-  - elasticsearch.yaml
-  - grafana-tls-secret.yaml
-  - bbb-basic-auth-secret.yaml
+namespace: jitsi
+
+# resources:
+#   - ingress-patch.yaml
+#   - bbb-endpoints.yaml
+#   - turn-endpoints.yaml
+#   - certificate.yaml
+#   - elasticsearch.yaml
+#   - grafana-tls-secret.yaml
+#   - bbb-basic-auth-secret.yaml
 
 patchesStrategicMerge:
-  - grafana-deployment-patch.yaml
-  - grafana-ingress-patch.yaml
-  - prometheus-prometheus-patch.yaml
-  - haproxy-ingress-patch.yaml
+  - ingress-patch.yaml
+  - tls.secret.yaml
+#   - grafana-deployment-patch.yaml
+#   - grafana-ingress-patch.yaml
+#   - prometheus-prometheus-patch.yaml
+#   - haproxy-ingress-patch.yaml

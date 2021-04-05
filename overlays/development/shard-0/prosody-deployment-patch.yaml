@@ -10,10 +10,6 @@ spec:
     matchLabels:
       shard: "0"
   template:
-    spec:
-      # avoid that pods of different shards share zone
-      nodeSelector:
-        topology.kubernetes.io/zone: ZONE_1
     metadata:
       labels:
         shard: "0"

@@ -1,0 +1,81 @@
+steps:
+  # Move Load the firebase credentials
+  - name: google/cloud-sdk
+    entrypoint: 'bash'
+    args:
+      [
+        '-c',
+        'gcloud secrets versions access latest --secret=firebase-credentials > firebase-credentials.json',
+      ]
+  - name: google/cloud-sdk
+    entrypoint: 'bash'
+    args:
+      [
+        '-c',
+        'gcloud secrets versions access latest --secret=k8s-tls-env > ./overlays/${_ENVIRONMENT}-monitoring/ops/tls.secret.yaml',
+      ]
+  - name: google/cloud-sdk
+    entrypoint: 'bash'
+    args:
+      [
+        '-c',
+        'sed -i "s/default/jitsi/g" ./overlays/${_ENVIRONMENT}-monitoring/ops/tls.secret.yaml',
+      ]
+  # Install Helm Packages: Nginx Ingress
+  - id: 'terraform-init'
+    name: 'hashicorp/terraform:0.12.30'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        cd tf/${_ENV}/
+        terraform init
+  - id: 'terraform-apply'
+    name: 'hashicorp/terraform:0.12.30'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        cd ./tf/${_ENV}/
+        terraform apply -auto-approve
+  - name: 'gcr.io/cloud-builders/kubectl'
+    id: 'metacontroller'
+    args:
+    - 'apply'
+    - '-k'
+    - 'https://github.com/metacontroller/metacontroller/manifests/production/'
+    env:
+    - 'CLOUDSDK_COMPUTE_ZONE=northamerica-northeast1-a'
+    - 'CLOUDSDK_CONTAINER_CLUSTER=meet-cluster'
+  - id: 'Test'
+    name: google/cloud-sdk
+    entrypoint: 'bash'
+    args:
+      [
+        '-c',
+        'cat ./overlays/${_ENVIRONMENT}-monitoring/ops/tls.secret.yaml'
+      ]
+  - id: 'Resources'
+    name: 'gcr.io/$PROJECT_ID/kustomize'
+    args:
+      - 'build'
+      - 'overlays/'
+    env:
+      - 'APPLY=true'
+      - 'CLOUDSDK_COMPUTE_ZONE=northamerica-northeast1-a'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=meet-cluster'
+      - 'GCLOUD_PROJECT=$PROJECT_ID'
+  # - id: 'kustomize-deploy'
+  #   name: 'gcr.io/$PROJECT_ID/kustomize'
+  #   args:
+  #     - 'build'
+  #     - 'overlays/${_ENVIRONMENT}/'
+  #   env:
+  #     - 'APPLY=true'
+  #     - 'CLOUDSDK_COMPUTE_REGION=northamerica-northeast1-a'
+  #     - 'CLOUDSDK_CONTAINER_CLUSTER=meet-cluster'
+  #     - 'GCLOUD_PROJECT=$PROJECT_ID'
+# Trigger must be set up for substitutions on GCP
+substitutions:
+  _ENVIRONMENT: 'development'
+  # _ENV: 'dev'

@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: meet
+  namespace: jitsi
+  annotations:
+    # NGINX chosen due to out of the box UDP service exposing
+    # GCE implies the NGINX ingress controller uses the GCP L7 load balancer
+    kubernetes.io/ingress.class: 'nginx'
+
+    # CORS Required
+    nginx.ingress.kubernetes.io/enable-cors: 'true'
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+
+    # ************ Mutatating Webhooks Not Supported By Autopilot ************
+    # # Cloudflare Origin CA
+    # nginx.ingress.kubernetes.io/proxy-ssl-secret: default/cf-tls
+
+    # TLS Config / Let's Encrypt
+    # cert-manager.io/issuer: "letsencrypt-production"
+    # certmanager.k8s.io/acme-challenge-type: "dns01"
+    # kubernetes.io/tls-acme: "true"
+    # ************************************************************************
+
+    # Increased Request Timeout / HTTP protocol after ingress
+    nginx.ingress.kubernetes.io/backend-protocol: 'HTTP'
+
+    # Websocket Config
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '3600'
+    nginx.ingress.kubernetes.io/proxy-send-timeout: '3600'
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  # Default Backend Route
+  backend:
+    serviceName: web
+    servicePort: 80
