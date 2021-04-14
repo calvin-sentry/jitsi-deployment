@@ -18,3 +18,5 @@ cluster/prod/.terraform.tfstate.lock.info
 .idea/
 .vscode/
 venv/
+
+base/ops/tls/cloudflare.yaml
