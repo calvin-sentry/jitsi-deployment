@@ -5,7 +5,7 @@ resources:
 - monitoring/
 - logging/
 - metacontroller/
-- cert-manager/
+- tls/
 - ingress-nginx/
 - dashboard/
 - loadbalancer/
