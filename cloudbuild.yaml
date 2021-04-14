@@ -7,9 +7,8 @@ steps:
     env:
       - 'APPLY=true'
       - 'CLOUDSDK_COMPUTE_ZONE=northamerica-northeast1-a'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=meet-dev'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=meet-cluster'
       - 'GCLOUD_PROJECT=$PROJECT_ID'
 # Trigger must be set up for substitutions on GCP
 substitutions:
   _ENVIRONMENT: 'development'
-  _ENV: 'dev'

@@ -20,3 +20,4 @@ cluster/prod/.terraform.tfstate.lock.info
 venv/
 
 base/ops/tls/cloudflare.yaml
+.env
