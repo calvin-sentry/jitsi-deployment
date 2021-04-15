@@ -6,21 +6,11 @@ metadata:
   name: grafana
   namespace: monitoring
 spec:
+  selector:
+    matchLabels:
+      app: grafana
   template:
     spec:
-      volumes:
-        # use persistent storage (e.g. for storing users) instead of in-memory storage
-        - $patch: delete
-          name: grafana-storage
-        - name: grafana-storage
-          persistentVolumeClaim:
-            claimName: grafana-storage
-        - configMap:
-            name: grafana-dashboard-jitsi
-          name: grafana-dashboard-jitsi
-        - configMap:
-            name: bbb-dashboards
-          name: bbb-dashboards
       containers:
         - name: grafana
           env:
@@ -29,6 +19,8 @@ spec:
               value: "%(protocol)s://%(domain)s:%(http_port)s/grafana/"
             - name: GF_SERVER_SERVE_FROM_SUB_PATH
               value: "true"
+            - name: GF_SERVER_DOMAIN
+              value: "graf.sentryhealth.dev"
           # mount Jitsi Grafana dashboard, such that it is available after first start of pod
           volumeMounts:
             - name: grafana-dashboard-jitsi
@@ -44,5 +36,16 @@ spec:
             requests:
               cpu: 600m
               memory: 600Mi
+      volumes:
+        # use persistent storage (e.g. for storing users) instead of in-memory storage
+        - name: grafana-storage
+          persistentVolumeClaim:
+            claimName: grafana-storage
+        - configMap:
+            name: grafana-dashboard-jitsi
+          name: grafana-dashboard-jitsi
+        - configMap:
+            name: bbb-dashboards
+          name: bbb-dashboards
       securityContext:
         fsGroup: 427

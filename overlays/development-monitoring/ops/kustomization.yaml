@@ -7,9 +7,10 @@ resources:
   - elasticsearch.yaml
   - grafana-tls-secret.yaml
   - bbb-basic-auth-secret.yaml
+  - prometheus-prometheus-patch.yaml # Added
 
 patchesStrategicMerge:
-  - grafana-deployment-patch.yaml
+  #- grafana-deployment-patch.yaml
   - grafana-ingress-patch.yaml
-  - prometheus-prometheus-patch.yaml
+  #- prometheus-prometheus-patch.yaml
   - haproxy-ingress-patch.yaml
