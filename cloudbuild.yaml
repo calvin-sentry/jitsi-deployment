@@ -1,32 +1,32 @@
 steps:
+  # - name: 'gcr.io/cloud-builders/kubectl'
+  #   id: 'Prometheus'
+  #   args:
+  #     - 'apply'
+  #     - '-f'
+  #     - './crds/bundle.yaml'
+  #   env:
+  #     - 'CLOUDSDK_COMPUTE_ZONE=northamerica-northeast1-a '
+  #     - 'CLOUDSDK_CONTAINER_CLUSTER=meet-cluster'
   - name: 'gcr.io/cloud-builders/kubectl'
-    id: 'Prometheus'
+    id: 'metacontroller'
     args:
       - 'apply'
-      - '-f'
-      - './crds/bundle.yaml'
+      - '-k'
+      - 'https://github.com/metacontroller/metacontroller/manifests/production/'
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=northamerica-northeast1-a'
       - 'CLOUDSDK_CONTAINER_CLUSTER=meet-cluster'
-  # - name: 'gcr.io/cloud-builders/kubectl'
-  #   id: 'metacontroller'
-  #   args:
-  #     - 'apply'
-  #     - '-k'
-  #     - 'https://github.com/metacontroller/metacontroller/manifests/production/'
-  #   env:
-  #     - 'CLOUDSDK_COMPUTE_ZONE=northamerica-northeast1-a'
-  #     - 'CLOUDSDK_CONTAINER_CLUSTER=meet-cluster'
-  # - id: 'Resources'
-  #   name: 'gcr.io/$PROJECT_ID/kustomize'
-  #   args:
-  #     - 'build'
-  #     - 'overlays/${_ENVIRONMENT}/'
-  #   env:
-  #     - 'APPLY=true'
-  #     - 'CLOUDSDK_COMPUTE_ZONE=northamerica-northeast1-a'
-  #     - 'CLOUDSDK_CONTAINER_CLUSTER=meet-cluster'
-  #     - 'GCLOUD_PROJECT=$PROJECT_ID'
+  - id: 'Resources'
+    name: 'gcr.io/$PROJECT_ID/kustomize'
+    args:
+      - 'build'
+      - 'overlays/${_ENVIRONMENT}/'
+    env:
+      - 'APPLY=true'
+      - 'CLOUDSDK_COMPUTE_ZONE=northamerica-northeast1-a'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=meet-cluster'
+      - 'GCLOUD_PROJECT=$PROJECT_ID'
   - id: 'Monitoring Resources'
     name: 'gcr.io/$PROJECT_ID/kustomize'
     args:

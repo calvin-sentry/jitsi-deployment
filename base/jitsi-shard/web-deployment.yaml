@@ -42,7 +42,7 @@ spec:
             requests:
               memory: 300Mi
               cpu: 400m
-          image: jitsi/web:stable-4548-1
+          image: jitsi/web:stable-5765
           imagePullPolicy: Always
           readinessProbe:
             httpGet:
@@ -80,6 +80,19 @@ spec:
             - name: XMPP_MUC_DOMAIN
               value: muc.meet.jitsi
             - name: TZ
-              value: Europe/Berlin
+              value: UTC
             - name: JVB_TCP_HARVESTER_DISABLED
               value: "true"
+            - name: ENABLE_AUTH
+              value: "1"
+            - name: ENABLE_GUESTS
+              value: "0"
+            - name: AUTH_TYPE
+              value: jwt
+            - name: JWT_APP_ID
+              value: my_jitsi_app_id
+            - name: JWT_APP
+              value: my_jitsi_app_secret
+            - name: PUBLIC_URL
+              value: https://video.sentryhealth.dev
+            

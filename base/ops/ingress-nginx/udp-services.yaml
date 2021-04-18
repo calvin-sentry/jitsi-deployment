@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: udp-services
+  namespace: ingress-nginx
+data:
+  "30300": jitsi/shard-0-jvb-0:30300
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  # "REPLACE_ME_0": jitsi/shard-0-jvb-0:REPLACE_ME_0
+  
+  # "REPLACE_ME_1": jitsi/shard-1-jvb-1:REPLACE_ME_1
+  # "REPLACE_ME_1": jitsi/shard-1-jvb-1:REPLACE_ME_1
+  # "REPLACE_ME_1": jitsi/shard-1-jvb-1:REPLACE_ME_1
+  # "REPLACE_ME_1": jitsi/shard-1-jvb-1:REPLACE_ME_1
+  # "REPLACE_ME_1": jitsi/shard-1-jvb-1:REPLACE_ME_1
+  
