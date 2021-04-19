@@ -1,13 +1,4 @@
 steps:
-  # - name: 'gcr.io/cloud-builders/kubectl'
-  #   id: 'Prometheus'
-  #   args:
-  #     - 'apply'
-  #     - '-f'
-  #     - './crds/bundle.yaml'
-  #   env:
-  #     - 'CLOUDSDK_COMPUTE_ZONE=northamerica-northeast1-a '
-  #     - 'CLOUDSDK_CONTAINER_CLUSTER=meet-cluster'
   - name: 'gcr.io/cloud-builders/kubectl'
     id: 'metacontroller'
     args:
@@ -15,8 +6,8 @@ steps:
       - '-k'
       - 'https://github.com/metacontroller/metacontroller/manifests/production/'
     env:
-      - 'CLOUDSDK_COMPUTE_ZONE=northamerica-northeast1-a'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=meet-cluster'
+      - 'CLOUDSDK_COMPUTE_ZONE=${_ZONE}'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER}'
   - id: 'Resources'
     name: 'gcr.io/$PROJECT_ID/kustomize'
     args:
@@ -24,8 +15,8 @@ steps:
       - 'overlays/${_ENVIRONMENT}/'
     env:
       - 'APPLY=true'
-      - 'CLOUDSDK_COMPUTE_ZONE=northamerica-northeast1-a'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=meet-cluster'
+      - 'CLOUDSDK_COMPUTE_ZONE=${_ZONE}'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER}'
       - 'GCLOUD_PROJECT=$PROJECT_ID'
   - id: 'Monitoring Resources'
     name: 'gcr.io/$PROJECT_ID/kustomize'
@@ -34,9 +25,11 @@ steps:
       - 'overlays/${_ENVIRONMENT}-monitoring/'
     env:
       - 'APPLY=true'
-      - 'CLOUDSDK_COMPUTE_ZONE=northamerica-northeast1-a'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=meet-cluster'
+      - 'CLOUDSDK_COMPUTE_ZONE=${_ZONE}'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER}'
       - 'GCLOUD_PROJECT=$PROJECT_ID'
 # Trigger must be set up for substitutions on GCP
 substitutions:
   _ENVIRONMENT: 'development'
+  _CLUSTER: 'meet-cluster'
+  _ZONE: 'northamerica-northeast1-a'

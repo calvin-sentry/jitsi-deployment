@@ -42,7 +42,7 @@ spec:
             requests:
               memory: 300Mi
               cpu: 400m
-          image: jitsi/web:stable-5765
+          image: jitsi/web:stable-4548-1
           imagePullPolicy: Always
           readinessProbe:
             httpGet:
@@ -86,13 +86,17 @@ spec:
             - name: ENABLE_AUTH
               value: "1"
             - name: ENABLE_GUESTS
-              value: "0"
+              value: "1"
             - name: AUTH_TYPE
               value: jwt
             - name: JWT_APP_ID
               value: my_jitsi_app_id
-            - name: JWT_APP
+            - name: JWT_APP_SECRET
               value: my_jitsi_app_secret
             - name: PUBLIC_URL
               value: https://video.sentryhealth.dev
+            - name: ENABLE_XMPP_WEBSOCKET
+              value: "0"
+            - name: JWT_TOKEN_AUTH_MODULE
+              value: token_verification
             

@@ -29,7 +29,7 @@ spec:
             requests:
               memory: 400Mi
               cpu: 400m
-          image: jitsi/jicofo:stable-5765
+          image: jitsi/jicofo:stable-4548-1
           imagePullPolicy: Always
           readinessProbe:
             # caution: this readinessProbe tries to create a new conference and hence also fails if
@@ -46,6 +46,8 @@ spec:
               value: auth.meet.jitsi
             - name: XMPP_INTERNAL_MUC_DOMAIN
               value: internal-muc.meet.jitsi
+            - name: XMPP_MUC_DOMAIN
+              value: muc.meet.jitsi
             - name: JICOFO_COMPONENT_SECRET
               valueFrom:
                 secretKeyRef:
@@ -67,12 +69,16 @@ spec:
             - name: ENABLE_AUTH
               value: "1"
             - name: ENABLE_GUESTS
-              value: "0"
+              value: "1"
             - name: AUTH_TYPE
               value: jwt
             - name: JWT_APP_ID
               value: my_jitsi_app_id
-            - name: JWT_APP
+            - name: JWT_APP_SECRET
               value: my_jitsi_app_secret
             - name: PUBLIC_URL
               value: https://video.sentryhealth.dev
+            - name: ENABLE_XMPP_WEBSOCKET
+              value: "0"
+            - name: JWT_TOKEN_AUTH_MODULE
+              value: token_verification
