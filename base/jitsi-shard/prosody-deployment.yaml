@@ -59,6 +59,9 @@ spec:
             mountPath: /usr/lib/prosody/modules/mod_measure_client_presence.lua
             subPath: mod_measure_client_presence.lua
           - name: prosody
+            mountPath: /usr/lib/prosody/modules/mod_speakerstats_component.lua
+            subPath: mod_speakerstats_component.lua
+          - name: prosody
             mountPath: /defaults/conf.d/jitsi-meet.cfg.lua
             subPath: jitsi-meet.cfg.lua
           env:
@@ -139,7 +142,7 @@ spec:
             - name: JWT_APP_SECRET
               value: my_jitsi_app_secret # Replace in Cloudbuild
             - name: PUBLIC_URL
-              value: https://video.sentryhealth.dev
+              value: https://engine.meet.sentryhealth.dev
             - name: ENABLE_XMPP_WEBSOCKET
               value: "0"
             - name: JWT_TOKEN_AUTH_MODULE
@@ -155,6 +158,8 @@ spec:
                 path: mod_measure_stanza_counts.lua
               - key: mod_measure_client_presence.lua
                 path: mod_measure_client_presence.lua
+              - key: mod_speakerstats_component.lua
+                path: mod_speakerstats_component.lua
               - key: jitsi-meet.cfg.lua
                 path: jitsi-meet.cfg.lua
       
