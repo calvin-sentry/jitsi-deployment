@@ -1,4 +1,4 @@
-FROM hashicorp/terraform:0.12.30
+FROM hashicorp/terraform:0.12.31
 
 ARG project_id=sentry-health-meet
 ARG env_dir=prod

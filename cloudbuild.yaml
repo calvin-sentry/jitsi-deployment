@@ -1,4 +1,12 @@
 steps:
+  - name: google/cloud-sdk
+    id: 'tls'
+    entrypoint: 'bash'
+    args:
+      [
+        '-c',
+        'gcloud secrets versions access latest --secret=tls-env > ./base/ops/tls/cloudflare.yaml',
+      ]
   - name: 'gcr.io/cloud-builders/kubectl'
     id: 'metacontroller'
     args:

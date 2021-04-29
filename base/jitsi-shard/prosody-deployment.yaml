@@ -32,7 +32,7 @@ spec:
               memory: 300Mi
               cpu: 300m
           # Custom Image to Incorporate JWT Moderator Field
-          image: gcr.io/sentry-health-sandbox/prosody:latest
+          image: gcr.io/sentry-health-meet/prosody:latest
           imagePullPolicy: Always
           ports:
             - name: metrics
@@ -142,7 +142,7 @@ spec:
             - name: JWT_APP_SECRET
               value: my_jitsi_app_secret # Replace in Cloudbuild
             - name: PUBLIC_URL
-              value: https://engine.meet.sentryhealth.dev
+              value: https://video.sentryhealth.dev
             - name: ENABLE_XMPP_WEBSOCKET
               value: "0"
             - name: JWT_TOKEN_AUTH_MODULE
