@@ -42,7 +42,7 @@ spec:
             requests:
               memory: 300Mi
               cpu: 400m
-          image: jitsi/web:stable-4548-1
+          image: gcr.io/sentry-health/meet-frontend
           imagePullPolicy: Always
           readinessProbe:
             httpGet:
@@ -84,7 +84,7 @@ spec:
             - name: JVB_TCP_HARVESTER_DISABLED
               value: "true"
             - name: ENABLE_AUTH
-              value: "1"
+              value: "0"
             - name: ENABLE_GUESTS
               value: "1"
             - name: AUTH_TYPE

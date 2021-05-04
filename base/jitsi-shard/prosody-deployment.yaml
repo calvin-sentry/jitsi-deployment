@@ -32,7 +32,7 @@ spec:
               memory: 300Mi
               cpu: 300m
           # Custom Image to Incorporate JWT Moderator Field
-          image: gcr.io/sentry-health-sandbox/prosody:latest
+          image: jitsi/prosody:stable-4548-1
           imagePullPolicy: Always
           ports:
             - name: metrics
@@ -129,7 +129,7 @@ spec:
             - name: XMPP_MUC_MODULES
               value: token_moderation
             - name: ENABLE_AUTH
-              value: "1"
+              value: "0"
             - name: ENABLE_GUESTS
               value: "1"
             - name: AUTH_TYPE

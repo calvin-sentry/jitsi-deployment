@@ -21,3 +21,4 @@ venv/
 
 
 .env
+terraform-credentials.json

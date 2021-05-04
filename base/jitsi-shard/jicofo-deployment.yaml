@@ -67,7 +67,7 @@ spec:
             - name: JICOFO_ENABLE_HEALTH_CHECKS
               value: "true"
             - name: ENABLE_AUTH
-              value: "1"
+              value: "0"
             - name: ENABLE_GUESTS
               value: "1"
             - name: AUTH_TYPE

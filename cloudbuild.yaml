@@ -17,7 +17,6 @@ steps:
       - 'APPLY=true'
       - 'CLOUDSDK_COMPUTE_ZONE=${_ZONE}'
       - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER}'
-      - 'GCLOUD_PROJECT=$PROJECT_ID'
   - id: 'Monitoring Resources'
     name: 'gcr.io/$PROJECT_ID/kustomize'
     args:

@@ -115,7 +115,7 @@ spec:
             - name: TZ
               value: UTC
             - name: ENABLE_AUTH
-              value: "1"
+              value: "0"
             - name: ENABLE_GUESTS
               value: "0"
             - name: AUTH_TYPE
