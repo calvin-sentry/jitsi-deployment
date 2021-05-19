@@ -49,17 +49,14 @@ data:
           selector: {
               [labelKey]: statefulset.metadata.name + "-" + index
             },
-            type: "ClusterIP",
+            type: "NodePort",
+            externalTrafficPolicy: "Local",
             ports: [
-              {
-                "port": 4443,
-                "protocol": "TCP",
-                "targetPort": 4443
-              },
               {
                 "port": basePort + index,
                 "protocol": "UDP",
-                "targetPort": basePort + index
+                "targetPort": basePort + index,
+                "nodePort": basePort + index
               }
             ]
           }
