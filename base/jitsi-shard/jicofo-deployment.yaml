@@ -67,9 +67,9 @@ spec:
             - name: JICOFO_ENABLE_HEALTH_CHECKS
               value: "true"
             - name: ENABLE_AUTH
-              value: "0"
-            - name: ENABLE_GUESTS
               value: "1"
+            - name: ENABLE_GUESTS
+              value: "0"
             - name: AUTH_TYPE
               value: jwt
             - name: JWT_APP_ID
@@ -77,7 +77,7 @@ spec:
             - name: JWT_APP_SECRET
               value: my_jitsi_app_secret
             - name: PUBLIC_URL
-              value: https://meet.sentryhealth.ca
+              value: https://video.sentryhealth.ca
             - name: ENABLE_XMPP_WEBSOCKET
               value: "0"
             - name: JWT_TOKEN_AUTH_MODULE

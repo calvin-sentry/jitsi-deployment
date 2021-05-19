@@ -129,9 +129,9 @@ spec:
             - name: XMPP_MUC_MODULES
               value: token_moderation
             - name: ENABLE_AUTH
-              value: "0"
-            - name: ENABLE_GUESTS
               value: "1"
+            - name: ENABLE_GUESTS
+              value: "0"
             - name: AUTH_TYPE
               value: jwt
             - name: JWT_APP_ID

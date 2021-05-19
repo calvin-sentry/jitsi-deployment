@@ -84,9 +84,9 @@ spec:
             - name: JVB_TCP_HARVESTER_DISABLED
               value: "true"
             - name: ENABLE_AUTH
-              value: "0"
-            - name: ENABLE_GUESTS
               value: "1"
+            - name: ENABLE_GUESTS
+              value: "0"
             - name: AUTH_TYPE
               value: jwt
             - name: JWT_APP_ID
