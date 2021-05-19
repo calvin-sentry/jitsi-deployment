@@ -46,6 +46,8 @@ spec:
               value: auth.meet.jitsi
             - name: XMPP_INTERNAL_MUC_DOMAIN
               value: internal-muc.meet.jitsi
+            - name: XMPP_MUC_DOMAIN
+              value: muc.meet.jitsi
             - name: JICOFO_COMPONENT_SECRET
               valueFrom:
                 secretKeyRef:
@@ -59,8 +61,30 @@ spec:
                   name: jitsi-config
                   key: JICOFO_AUTH_PASSWORD
             - name: TZ
-              value: Europe/Berlin
+              value: UTC
             - name: JVB_BREWERY_MUC
               value: jvbbrewery
             - name: JICOFO_ENABLE_HEALTH_CHECKS
               value: "true"
+            - name: ENABLE_AUTH
+              value: "1"
+            - name: ENABLE_GUESTS
+              value: "0"
+            - name: AUTH_TYPE
+              value: jwt
+            - name: JWT_APP_ID
+              valueFrom:
+                secretKeyRef:
+                  name: auth-config
+                  key: JWT_APP_ID
+            - name: JWT_APP_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: auth-config
+                  key: JWT_APP_SECRET 
+            - name: PUBLIC_URL
+              value: https://video.sentryhealth.ca
+            - name: ENABLE_XMPP_WEBSOCKET
+              value: "0"
+            - name: JWT_TOKEN_AUTH_MODULE
+              value: token_verification

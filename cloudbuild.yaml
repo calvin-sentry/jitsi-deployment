@@ -1,0 +1,56 @@
+steps:
+  - name: google/cloud-sdk
+    id: 'import jitsi secrets'
+    entrypoint: 'bash'
+    args:
+      [
+        '-c',
+        'gcloud secrets versions access latest --secret=jitsi-secret > ./base/jitsi/jitsi-secret.yaml'
+      ]
+  - name: google/cloud-sdk
+    id: 'import jitsi jwt-auth secrets'
+    entrypoint: 'bash'
+    args: [
+        '-c',
+        'gcloud secrets versions access latest --secret=jitsi-jwt-secret > ./base/jitsi/jitsi-jwt-secret.yaml'
+      ]
+  - name: google/cloud-sdk
+    id: 'import tls secrets'
+    entrypoint: 'bash'
+    args: [
+        '-c',
+        'gcloud secrets versions access latest --secret=tls-env > ./base/ops/tls/cloudflare.yaml'
+      ]
+  - name: 'gcr.io/cloud-builders/kubectl'
+    id: 'metacontroller'
+    args:
+      - 'apply'
+      - '-k'
+      - 'https://github.com/metacontroller/metacontroller/manifests/production/'
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=${_ZONE}'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER}'
+  - id: 'Resources'
+    name: 'gcr.io/$PROJECT_ID/kustomize'
+    args:
+      - 'build'
+      - 'overlays/${_ENVIRONMENT}/'
+    env:
+      - 'APPLY=true'
+      - 'CLOUDSDK_COMPUTE_ZONE=${_ZONE}'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER}'
+  - id: 'Monitoring Resources'
+    name: 'gcr.io/$PROJECT_ID/kustomize'
+    args:
+      - 'build'
+      - 'overlays/${_ENVIRONMENT}-monitoring/'
+    env:
+      - 'APPLY=true'
+      - 'CLOUDSDK_COMPUTE_ZONE=${_ZONE}'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER}'
+      - 'GCLOUD_PROJECT=$PROJECT_ID'
+# Trigger must be set up for substitutions on GCP
+substitutions:
+  _ENVIRONMENT: 'development'
+  _CLUSTER: 'meet-cluster'
+  _ZONE: 'northamerica-northeast1-a'

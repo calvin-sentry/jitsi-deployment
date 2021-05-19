@@ -35,17 +35,17 @@ spec:
       # in case there is a long running conference on a JVB that should be shut down, give it time to finish
       terminationGracePeriodSeconds: 2147483647
       containers:
-        - name: prometheus-exporter
-          # sidecar container that exports stats for prometheus
-          # values are scraped by ../ops/monitoring/jvb-pod-monitor.yaml
-          image: systemli/prometheus-jitsi-meet-exporter:1.1.1
-          imagePullPolicy: Always
-          ports:
-            - name: metrics
-              containerPort: 9888
-          args:
-            - "-videobridge-url"
-            - "http://localhost:8080/colibri/stats"
+        # - name: prometheus-exporter
+        #   # sidecar container that exports stats for prometheus
+        #   # values are scraped by ../ops/monitoring/jvb-pod-monitor.yaml
+        #   image: systemli/prometheus-jitsi-meet-exporter:1.1.1
+        #   imagePullPolicy: Always
+        #   ports:
+        #     - name: metrics
+        #       containerPort: 9888
+        #   args:
+        #     - "-videobridge-url"
+        #     - "http://localhost:8080/colibri/stats"
         - name: jvb
           image: jitsi/jvb:stable-4548-1
           imagePullPolicy: Always
@@ -75,9 +75,7 @@ spec:
             - name: XMPP_SERVER
               value: prosody
             - name: DOCKER_HOST_ADDRESS
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
+              value: "35.203.121.182"
             - name: XMPP_DOMAIN
               value: meet.jitsi
             - name: XMPP_AUTH_DOMAIN
@@ -85,14 +83,13 @@ spec:
             - name: XMPP_INTERNAL_MUC_DOMAIN
               value: internal-muc.meet.jitsi
             - name: JVB_STUN_SERVERS
-              valueFrom:
-                secretKeyRef:
-                  name: jitsi-config
-                  key: JVB_STUN_SERVERS
+              value: meet-jit-si-turnrelay.jitsi.net:443
             - name: JICOFO_AUTH_USER
               value: focus
             - name: JVB_TCP_HARVESTER_DISABLED
               value: "true"
+            - name: JVB_TCP_PORT
+              value: "4443"
             - name: JVB_ENABLE_APIS
               value: colibri,rest
             - name: JVB_AUTH_USER
@@ -110,4 +107,26 @@ spec:
             - name: JVB_BREWERY_MUC
               value: jvbbrewery
             - name: TZ
-              value: Europe/Berlin
+              value: UTC
+            - name: ENABLE_AUTH
+              value: "1"
+            - name: ENABLE_GUESTS
+              value: "0"
+            - name: AUTH_TYPE
+              value: jwt
+            - name: JWT_APP_ID
+              valueFrom:
+                secretKeyRef:
+                  name: auth-config
+                  key: JWT_APP_ID
+            - name: JWT_APP_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: auth-config
+                  key: JWT_APP_SECRET 
+            - name: PUBLIC_URL
+              value: https://video.sentryhealth.dev
+            - name: ENABLE_XMPP_WEBSOCKET
+              value: "0"
+            - name: JWT_TOKEN_AUTH_MODULE
+              value: token_verification

@@ -22,19 +22,6 @@ spec:
         k8s-app: prosody
         shard: "0"
     spec:
-      volumes:
-        - name: prosody
-          configMap:
-            name: prosody
-            items:
-              - key: mod_prometheus.lua
-                path: mod_prometheus.lua
-              - key: mod_measure_stanza_counts.lua
-                path: mod_measure_stanza_counts.lua
-              - key: mod_measure_client_presence.lua
-                path: mod_measure_client_presence.lua
-              - key: jitsi-meet.cfg.lua
-                path: jitsi-meet.cfg.lua
       containers:
         - name: prosody
           resources:
@@ -44,7 +31,8 @@ spec:
             requests:
               memory: 300Mi
               cpu: 300m
-          image: jitsi/prosody:stable-4548-1
+          # Custom Image to Incorporate JWT Moderator Field
+          image: gcr.io/sentry-health-meet/prosody:stable
           imagePullPolicy: Always
           ports:
             - name: metrics
@@ -104,7 +92,7 @@ spec:
                   name: jitsi-config
                   key: JICOFO_AUTH_PASSWORD
             - name: TZ
-              value: Europe/Berlin
+              value: UTC
             - name: JVB_TCP_HARVESTER_DISABLED
               value: "true"
             # activate add-ons that enrich the available stats of prosody
@@ -138,4 +126,41 @@ spec:
                 secretKeyRef:
                   name: jitsi-config
                   key: TURNS_PORT
-            
+            - name: XMPP_MUC_MODULES
+              value: token_moderation
+            - name: ENABLE_AUTH
+              value: "1"
+            - name: ENABLE_GUESTS
+              value: "0"
+            - name: AUTH_TYPE
+              value: jwt
+            - name: JWT_APP_ID
+              valueFrom:
+                secretKeyRef:
+                  name: auth-config
+                  key: JWT_APP_ID
+            - name: JWT_APP_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: auth-config
+                  key: JWT_APP_SECRET 
+            - name: PUBLIC_URL
+              value: https://video.sentryhealth.dev
+            - name: ENABLE_XMPP_WEBSOCKET
+              value: "0"
+            - name: JWT_TOKEN_AUTH_MODULE
+              value: token_verification
+      volumes:
+        - name: prosody
+          configMap:
+            name: prosody
+            items:
+              - key: mod_prometheus.lua
+                path: mod_prometheus.lua
+              - key: mod_measure_stanza_counts.lua
+                path: mod_measure_stanza_counts.lua
+              - key: mod_measure_client_presence.lua
+                path: mod_measure_client_presence.lua
+              - key: jitsi-meet.cfg.lua
+                path: jitsi-meet.cfg.lua
+      

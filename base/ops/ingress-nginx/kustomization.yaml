@@ -3,6 +3,8 @@ kind: Kustomization
 
 resources:
 - ingress-nginx.yaml
+- udp-services.yaml
+# - ingress-udp-nginx.yaml
 
 patchesStrategicMerge:
 - nginx-patch.yaml

@@ -8,10 +8,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - jitsi.staging.messenger.schule
+    - graf.sentryhealth.dev
     secretName: jitsi-messenger-schule-tls
   rules:
-    - host: jitsi.staging.messenger.schule
+    - host: graf.sentryhealth.dev
       http:
         paths:
         # only match /grafana and paths under /grafana/

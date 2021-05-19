@@ -38,8 +38,8 @@ data:
         INITIAL_TOOLBAR_TIMEOUT: 20000,
         TOOLBAR_TIMEOUT: 4000,
         TOOLBAR_ALWAYS_VISIBLE: false,
-        DEFAULT_REMOTE_DISPLAY_NAME: 'Gast',
-        DEFAULT_LOCAL_DISPLAY_NAME: 'Ich',
+        DEFAULT_REMOTE_DISPLAY_NAME: 'Sentry Member',
+        DEFAULT_LOCAL_DISPLAY_NAME: 'Sentry Local',
         SHOW_JITSI_WATERMARK: false,
         JITSI_WATERMARK_LINK: 'https://jitsi.org',
 
@@ -49,12 +49,12 @@ data:
         BRAND_WATERMARK_LINK: '',
         SHOW_POWERED_BY: false,
         SHOW_DEEP_LINKING_IMAGE: false,
-        GENERATE_ROOMNAMES_ON_WELCOME_PAGE: true,
+        GENERATE_ROOMNAMES_ON_WELCOME_PAGE: false,
         DISPLAY_WELCOME_PAGE_CONTENT: true,
         DISPLAY_WELCOME_PAGE_TOOLBAR_ADDITIONAL_CONTENT: false,
-        APP_NAME: 'Jitsi Meet',
-        NATIVE_APP_NAME: 'Jitsi Meet',
-        PROVIDER_NAME: 'Jitsi',
+        APP_NAME: 'Sentry Meet',
+        NATIVE_APP_NAME: 'Sentry Meet',
+        PROVIDER_NAME: 'Sentry Health',
         LANG_DETECTION: true, // Allow i18n to detect the system language
         INVITATION_POWERED_BY: true,
 
@@ -139,7 +139,7 @@ data:
          *
          * @type {boolean}
          */
-        MOBILE_APP_PROMO: true,
+        MOBILE_APP_PROMO: false,
 
         /**
          * Maximum coeficient of the ratio of the large video to the visible area
@@ -540,7 +540,7 @@ data:
 
         // Whether to use a welcome page or not. In case it's false a random room
         // will be joined when no room is specified.
-        enableWelcomePage: true,
+        enableWelcomePage: false,
 
         // Enabling the close page will ignore the welcome page redirection when
         // a call is hangup.
@@ -550,7 +550,7 @@ data:
         // disable1On1Mode: false,
 
         // Default language for the user interface.
-        defaultLanguage: 'de',
+        defaultLanguage: 'en',
 
         // If true all users without a token will be considered guests and all users
         // with token will be considered non-guests. Only guests will be allowed to

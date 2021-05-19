@@ -16,17 +16,17 @@ spec:
       labels:
         k8s-app: haproxy
     spec:
-      affinity:
-        # HAProxy pods should run in different availability zones
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: k8s-app
-                operator: In
-                values:
-                - haproxy
-            topologyKey: "topology.kubernetes.io/zone"
+      # affinity:
+      #   # HAProxy pods should run in different availability zones
+      #   podAntiAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #     - labelSelector:
+      #         matchExpressions:
+      #         - key: k8s-app
+      #           operator: In
+      #           values:
+      #           - haproxy
+      #       topologyKey: "topology.kubernetes.io/zone"
       volumes:
         - name: haproxy-config
           configMap:

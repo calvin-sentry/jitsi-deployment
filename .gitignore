@@ -18,3 +18,7 @@ cluster/prod/.terraform.tfstate.lock.info
 .idea/
 .vscode/
 venv/
+
+
+.env
+terraform-credentials.json

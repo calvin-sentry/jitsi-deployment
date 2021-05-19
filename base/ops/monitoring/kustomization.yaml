@@ -2,7 +2,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-- https://github.com/coreos/kube-prometheus?ref=master
 - custom-metrics-apiservice.yaml
 - metrics-server.yaml
 - grafana-ingress.yaml
@@ -19,8 +18,10 @@ resources:
 - turn-service.yaml
 - turn-service-monitor.yaml
 - haproxy-pod-monitor.yaml
+- grafana-deployment-patch.yaml # Added
+- prometheus-adapter-config-map-patch.yaml # Added
+- monitoring-namespace.yaml # Added
 
 patchesStrategicMerge:
 - metrics-server-patch.yaml
-- grafana-deployment-patch.yaml
-- prometheus-adapter-config-map-patch.yaml
+
