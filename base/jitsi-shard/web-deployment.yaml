@@ -42,7 +42,7 @@ spec:
             requests:
               memory: 300Mi
               cpu: 400m
-          image: gcr.io/sentry-health/meet-frontend
+          image: gcr.io/sentry-health-meet/web
           imagePullPolicy: Always
           readinessProbe:
             httpGet:
@@ -94,7 +94,7 @@ spec:
             - name: JWT_APP_SECRET
               value: my_jitsi_app_secret
             - name: PUBLIC_URL
-              value: https://meet.sentryhealth.ca
+              value: https://video.sentryhealth.ca
             - name: ENABLE_XMPP_WEBSOCKET
               value: "0"
             - name: JWT_TOKEN_AUTH_MODULE
