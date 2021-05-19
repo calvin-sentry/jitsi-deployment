@@ -32,7 +32,7 @@ spec:
               memory: 300Mi
               cpu: 300m
           # Custom Image to Incorporate JWT Moderator Field
-          image: jitsi/prosody:stable-4548-1
+          image: gcr.io/sentry-health-meet/prosody:stable
           imagePullPolicy: Always
           ports:
             - name: metrics
