@@ -7,6 +7,6 @@ spec:
   tls:
   - hosts:
     # fill in host here
-    - meet.sentryhealth.ca
-    - meet.sentryhealth.dev
+    - video.sentryhealth.ca
+    - video.sentryhealth.dev
     secretName: jitsi-messenger-schule-tls
