@@ -1,4 +1,26 @@
 steps:
+  - name: google/cloud-sdk
+    id: 'import jitsi secrets'
+    entrypoint: 'bash'
+    args:
+      [
+        '-c',
+        'gcloud secrets versions access latest --secret=jitsi-secret > ./base/jitsi/jitsi-secret.yaml'
+      ]
+  - name: google/cloud-sdk
+    id: 'import jitsi jwt-auth secrets'
+    entrypoint: 'bash'
+    args: [
+        '-c',
+        'gcloud secrets versions access latest --secret=jitsi-jwt-secret > ./base/jitsi/jitsi-jwt-secret.yaml'
+      ]
+  - name: google/cloud-sdk
+    id: 'import tls secrets'
+    entrypoint: 'bash'
+    args: [
+        '-c',
+        'gcloud secrets versions access latest --secret=tls-env > ./base/ops/tls/cloudflare.yaml'
+      ]
   - name: 'gcr.io/cloud-builders/kubectl'
     id: 'metacontroller'
     args:

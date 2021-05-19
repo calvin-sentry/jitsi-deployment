@@ -73,9 +73,15 @@ spec:
             - name: AUTH_TYPE
               value: jwt
             - name: JWT_APP_ID
-              value: my_jitsi_app_id
+              valueFrom:
+                secretKeyRef:
+                  name: auth-config
+                  key: JWT_APP_ID
             - name: JWT_APP_SECRET
-              value: my_jitsi_app_secret
+              valueFrom:
+                secretKeyRef:
+                  name: auth-config
+                  key: JWT_APP_SECRET 
             - name: PUBLIC_URL
               value: https://video.sentryhealth.ca
             - name: ENABLE_XMPP_WEBSOCKET

@@ -19,8 +19,11 @@ sed -i 's/STUN_PORT: .*/STUN_PORT: '$(encrypt-secret "STUN_PORT")'/g' base/jitsi
 sed -i 's/TURN_PORT: .*/TURN_PORT: '$(encrypt-secret "TURN_PORT")'/g' base/jitsi/jitsi-secret.yaml
 sed -i 's/TURNS_PORT: .*/TURNS_PORT: '$(encrypt-secret "TURNS_PORT")'/g' base/jitsi/jitsi-secret.yaml
 
-sed -i 's/users: .*/users: '$(encrypt-secret "elastic_users")'/g' base/ops/logging/es-realm-secret.yaml
-sed -i 's/users_roles: .*/users_roles: '$(encrypt-secret "elastic_users_roles")'/g' base/ops/logging/es-realm-secret.yaml
+# sed -i 's/JWT_APP_ID: .*/JWT_APP_ID: '$(encrypt-secret "JWT_APP_ID")'/g' base/jitsi/jitsi-jwt-secret.yaml
+# sed -i 's/JWT_APP_SECRET: .*/JWT_APP_SECRET: '$(encrypt-secret "JWT_APP_SECRET")'/g' base/jitsi/jitsi-jwt-secret.yaml
 
-sed -i 's/username: .*/username: '$(encrypt-secret "bbb_username")'/g' overlays/${instance}-monitoring/ops/bbb-basic-auth-secret.yaml
-sed -i 's/password: .*/password: '$(encrypt-secret "bbb_password")'/g' overlays/${instance}-monitoring/ops/bbb-basic-auth-secret.yaml
+# sed -i 's/users: .*/users: '$(encrypt-secret "elastic_users")'/g' base/ops/logging/es-realm-secret.yaml
+# sed -i 's/users_roles: .*/users_roles: '$(encrypt-secret "elastic_users_roles")'/g' base/ops/logging/es-realm-secret.yaml
+
+# sed -i 's/username: .*/username: '$(encrypt-secret "bbb_username")'/g' overlays/${instance}-monitoring/ops/bbb-basic-auth-secret.yaml
+# sed -i 's/password: .*/password: '$(encrypt-secret "bbb_password")'/g' overlays/${instance}-monitoring/ops/bbb-basic-auth-secret.yaml
