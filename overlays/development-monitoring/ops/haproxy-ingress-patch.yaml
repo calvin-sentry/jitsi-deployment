@@ -6,11 +6,11 @@ metadata:
 spec:
   tls:
   - hosts:
-    - meet.sentryhealth.ca
+    - video.sentryhealth.ca
     - '*.sentryhealth.ca'
     secretName: jitsi-messenger-schule-tls
   rules:
-    - host: meet.sentryhealth.ca
+    - host: video.sentryhealth.ca
       http:
         paths:
           - path: /

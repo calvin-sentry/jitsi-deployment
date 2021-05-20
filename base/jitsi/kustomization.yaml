@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
 - jitsi-namespace.yaml
 - web-service.yaml
+- jitsi-jwt-secret.yaml
 - jitsi-secret.yaml
 - prosody-configmap.yaml
 - web-configmap.yaml
