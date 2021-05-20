@@ -42,7 +42,7 @@ spec:
             requests:
               memory: 300Mi
               cpu: 400m
-          image: gcr.io/sentry-health-meet/web:stable
+          image: gcr.io/sentry-health-meet/meet-frontend:stable
           imagePullPolicy: Always
           readinessProbe:
             httpGet:
